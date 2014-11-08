@@ -20,6 +20,7 @@ public class RandomSentenceSpout extends BaseRichSpout {
 	@Override
 	public void open(@SuppressWarnings("rawtypes") Map conf, TopologyContext context,
 			SpoutOutputCollector collector) {
+		// stores a reference to the SpoutOutputCollector object in an instance variable.
 		_collector = collector;
 		_rand = new Random();
 	}
@@ -31,12 +32,15 @@ public class RandomSentenceSpout extends BaseRichSpout {
 				"an apple a day keeps the doctor away", "four score and seven years ago",
 				"snow white and the seven dwarfs", "i am at two with nature" };
 		String sentence = sentences[_rand.nextInt(sentences.length)];
+		// emit the sentence.
 		_collector.emit(new Values(sentence));
-		System.out.println("[RandomSentenceSpout] "+sentence);
+		System.out.println("[RandomSentenceSpout] " + sentence);
 	}
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
+		// declaring that our spout will emit a single (default) stream of tuples containing a
+		// single field ("word").
 		declarer.declare(new Fields("word"));
 	}
 
