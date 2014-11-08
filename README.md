@@ -1,4 +1,4 @@
 storm-sample
+============
 
-・word count
-・Twitter trend detection
+Word count.
