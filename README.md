@@ -1,4 +1,4 @@
 storm-sample
 ============
 
-Word count.
+Word count
