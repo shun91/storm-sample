@@ -1,6 +1,5 @@
 package shun.storm.sample.bolt;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import backtype.storm.task.OutputCollector;
@@ -11,11 +10,8 @@ import backtype.storm.tuple.Fields;
 import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
-public class WordCountBolt extends BaseRichBolt {
+public class ExtractHashtagBolt extends BaseRichBolt {
 	private static final long serialVersionUID = 1L;
-	
-	// "counts" store all the words and their corresponding counts.
-	Map<String, Integer> counts = new HashMap<String, Integer>();
 
 	OutputCollector _collector;
 
@@ -28,23 +24,22 @@ public class WordCountBolt extends BaseRichBolt {
 
 	@Override
 	public void execute(Tuple tuple) {
-		// look up the count for the word received (initializing it to 0 if necessary),
-		String word = tuple.getStringByField("word");
-		int count=0;
-		if(counts.containsKey(word)){
-			count = counts.get(word);
+		// looks up the value of the "word" field of the incoming tuple as a string.
+		String sentence = tuple.getStringByField("word");
+		// splits the value into individual words.
+		String[] wordArray = sentence.split("\\s", 0);
+		// emits a new tuple for each hashtag.
+		for (String word : wordArray) {
+			if(word.startsWith("#")){
+				_collector.emit(new Values(word));
+			}
 		}
-		// increment the count.
-		count++;
-		// store the count.
-		counts.put(word, count);
-		_collector.emit(new Values(word,count));
-		System.out.println(word+": "+count);
 	}
 
 	@Override
 	public void declareOutputFields(OutputFieldsDeclarer declarer) {
-		declarer.declare(new Fields("word","count"));
+		// declares a single stream of tuples, each containing one field ("word").
+		declarer.declare(new Fields("word"));
 	}
 
 }
