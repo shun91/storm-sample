@@ -3,8 +3,8 @@ storm-sample
 Apache Stormで実行できるプログラムの簡単なコードです．  
 以下の2つのTopologyを実装しています．
 
-+WordCount
-+HashtagReport
+-WordCount
+-HashtagReport
 
 各Topologyの説明
 ------
@@ -30,10 +30,10 @@ Twitter Streaming APIを利用してTweetを取得し，その中に含まれる
 4. 作成したjarをStormクラスタにコピー．
 5. jarを置いてあるディレクトリに移動して，下記コマンドで実行．
 
-	# WordCount
+    # WordCount
     storm jar storm-sample.jar shun.storm.sample.topology.WordCountTopology TOPOLOGY_NAME
-	# HashtagReport
-	storm jar storm-sample.jar shun.storm.sample.topology.HashtagReportTopology TOPOLOGY_NAME
+    # HashtagReport
+    storm jar storm-sample.jar shun.storm.sample.topology.HashtagReportTopology TOPOLOGY_NAME
 
 【注意】
 HashtagReportTopologyを実行するには，Twitter APIにアクセスするためのkeyを取得する必要があります．（方法はググれば出てきます）
