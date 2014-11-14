@@ -1,19 +1,22 @@
 storm-sample
 ======================
-Apache Stormで実行できるプログラムの簡単なコードです．
+Apache Stormで実行できるプログラムの簡単なコードです．  
 以下の2つのTopologyを実装しています．
+
 +WordCount
 +HashtagReport
 
 各Topologyの説明
 ------
 
-+   `WordCount` :
-	ランダムに生成される文章中に出現する単語の出現回数を単語毎にカウントします．
+###WordCount
 
-+   `HashtagReport` :
-	Twitter Streaming APIを利用してTweetを取得し，その中に含まれるハッシュタグの出現回数をタグごとにカウントします．
-	そして，出現回数の多いハッシュタグ上位10件を出力します．	
+ランダムに生成される文章中に出現する単語の出現回数を単語毎にカウントします．
+
+###HashtagReport
+
+Twitter Streaming APIを利用してTweetを取得し，その中に含まれるハッシュタグの出現回数をタグごとにカウントします．
+そして，出現回数の多いハッシュタグ上位10件を出力します．	
 
 実行するまでの流れ
 ------
@@ -26,6 +29,7 @@ Apache Stormで実行できるプログラムの簡単なコードです．
 3. jarファイルを作成する（エクスポート）．
 4. 作成したjarをStormクラスタにコピー．
 5. jarを置いてあるディレクトリに移動して，下記コマンドで実行．
+
 	# WordCount
     storm jar storm-sample.jar shun.storm.sample.topology.WordCountTopology TOPOLOGY_NAME
 	# HashtagReport
